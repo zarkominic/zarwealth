@@ -1,0 +1,39 @@
+# ZarWealth
+
+# Rastreadores de IA: permitidos a propósito.
+# OAI-SearchBot alimenta las citas de ChatGPT; GPTBot entrena modelos.
+# Bloquear GPTBot no impide aparecer citado, pero bloquear OAI-SearchBot sí.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.zarwealth.tech/sitemap.xml
