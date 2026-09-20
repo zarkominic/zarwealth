@@ -78,3 +78,5 @@ footer .mini{font-size:.8rem;opacity:.75}
 .boton{display:inline-block;padding:.9rem 1.8rem;background:var(--verde);color:#062015;
   border-radius:6px;font-weight:700;font-size:1rem}
 .boton:hover{text-decoration:none;filter:brightness(1.08)}
+
+.credito{color:var(--apagado);font-size:.78rem;text-align:right;margin:-1.8rem 0 2.5rem;opacity:.75}
