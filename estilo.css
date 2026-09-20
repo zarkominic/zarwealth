@@ -5,7 +5,10 @@
    temas oscuros fallan las comprobaciones WCAG más a menudo. Y quien calcula
    su finiquito lo hace de día, en el móvil, a veces al sol. */
 :root{
-  --fondo:#fbfbf9;          /* blanco roto: menos deslumbrante que el blanco puro */
+  /* El fondo va gris y la tarjeta blanca: así la herramienta se despega de la
+     página en lugar de fundirse con ella. Antes eran #fbfbf9 y #ffffff —cuatro
+     puntos de diferencia, invisibles. */
+  --fondo:#eef0ee;
   --cabecera:#ffffff;
   --tarjeta:#ffffff;
   --texto:#16181d;
@@ -13,7 +16,7 @@
   --verde:#0f7a44;          /* oscurecido: sobre claro necesita más contraste */
   --linea:#e3e2dd;
   --campo:#ffffff;
-  --realce:#f4f6f4;
+  --realce:#f6f7f6;
   /* Tipografía neutra: la serif de revista (Playfair) venía del blog. Una
      herramienta de cálculo fiscal necesita parecerse a la Agencia Tributaria,
      no a una revista: fuentes sin personalidad, que el número mande. */
@@ -22,7 +25,7 @@
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --fondo:#0a2540; --cabecera:#061a30; --tarjeta:rgba(255,255,255,.04);
+    --fondo:#0a2540; --cabecera:#061a30; --tarjeta:rgba(255,255,255,.055);
     --texto:#e2e8f0; --apagado:#94a3b8; --verde:#22c55e;
     --linea:rgba(226,232,240,.14); --campo:#0d2c4d; --realce:rgba(255,255,255,.04);
   }
@@ -111,7 +114,8 @@ footer .mini{font-size:.8rem;opacity:.75}
 .credito{color:var(--apagado);font-size:.78rem;text-align:right;margin:-1.8rem 0 2.5rem;opacity:.75}
 
 /* ── calculadora embebida ── */
-.calc{background:var(--tarjeta);border:1px solid var(--linea);box-shadow:0 1px 3px rgba(0,0,0,.05);border-radius:12px;
+.calc{background:var(--tarjeta);border:1px solid var(--linea);border-radius:14px;
+  box-shadow:0 1px 2px rgba(20,24,30,.06), 0 8px 24px -12px rgba(20,24,30,.18);
   padding:1.5rem;margin:2.2rem 0}
 /* en pantallas anchas la calculadora se sale de la columna de lectura:
    la prosa quiere 72 caracteres, una tabla de datos quiere sitio */
@@ -130,7 +134,12 @@ footer .mini{font-size:.8rem;opacity:.75}
   background:var(--campo);color:var(--texto);font:inherit;font-size:1rem;min-height:46px;
   text-overflow:ellipsis}
 .calc input:focus,.calc select:focus{outline:2px solid var(--verde);outline-offset:1px}
-.calc-salida{border-top:1px solid var(--linea);padding-top:1.1rem}
+.calc-salida{border-top:1px solid var(--linea);padding-top:1.2rem;margin-top:.3rem}
+@media (min-width:620px){
+  /* el resultado, sobre un tono distinto: es la respuesta, no un campo más */
+  .calc-salida{background:var(--realce);border-radius:10px;padding:1.2rem 1.3rem;
+    margin:.3rem -.4rem 0;border-top:0;border:1px solid var(--linea)}
+}
 .calc-salida .l{display:flex;justify-content:space-between;gap:1rem;padding:.42rem 0;font-size:.97rem}
 .calc-salida .l.apagado{color:var(--apagado);opacity:.65}
 .calc-salida .l.tot{border-top:1px solid var(--linea);margin-top:.5rem;padding-top:.7rem;
