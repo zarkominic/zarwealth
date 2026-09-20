@@ -39,10 +39,15 @@
     <div class="cabecera">
       <h1>Cómo se hace una factura de autónomo según dónde estés</h1>
       <p class="bajada">El IVA no se aplica en toda España. Cuándo va retención de IRPF, qué impuesto toca en cada territorio y por qué cobras menos de lo que pone en la factura.</p>
-      <p class="firma"><span class="avatar">Z</span> Zar · 20/09/2026 — 6 min de lectura</p>
+      <p class="firma"><span class="avatar">Z</span> Zar · 20/09/2026 — 5 min de lectura</p>
     </div>
     <img class="portada" src="../../imagenes/factura-autonomo.jpg" alt="Documentos de facturación y calculadora sobre una mesa de trabajo" width="1880" height="1253" loading="eager"><p class="credito">Foto: Pexels</p>
     <div class="contenido">
+<a class="aherr" href="../../herramientas/calculadora-factura-autonomo/">
+  <b>Ir directo a la calculadora →</b>
+  <span>Si solo quieres el número, está aquí. La explicación viene después.</span>
+</a>
+
 <p>Una factura de autónomo lleva dos cosas que se confunden constantemente: <b>un impuesto que sumas</b> (IVA, IGIC o IPSI, según dónde estés) y <b>una retención que restas</b> (IRPF). La primera no es tuya: la cobras para Hacienda. La segunda sí es tuya, pero la cobras más tarde.</p>
 
 <p>Y hay un detalle que sorprende a mucha gente: <b>el IVA no se aplica en toda España</b>.</p>
@@ -123,79 +128,10 @@
 
 <p>Y ese mismo trabajo <b>a un particular</b> en Madrid: 1.000 + 210 de IVA, sin retención, <b>1.210 €</b>.</p>
 
-<h2>Calcúlalo con tus números</h2>
-
-<div class="calc">
-  <div class="calc-campos">
-    <label>Base imponible (€)
-      <input type="number" id="base" value="1000" min="0" step="50"></label>
-    <label>¿Dónde estás?
-      <select id="terr">
-        <option value="21">Península o Baleares — IVA 21 %</option>
-        <option value="10">Península o Baleares — IVA 10 %</option>
-        <option value="4">Península o Baleares — IVA 4 %</option>
-        <option value="7">Canarias — IGIC 7 %</option>
-        <option value="3">Canarias — IGIC 3 %</option>
-        <option value="0">Canarias — IGIC 0 %</option>
-        <option value="-1">Ceuta o Melilla — IPSI (consulta la ordenanza)</option>
-      </select></label>
-    <label>¿Quién es tu cliente?
-      <select id="cli">
-        <option value="1">Empresa, autónomo o entidad pública</option>
-        <option value="0">Particular</option>
-        <option value="0">Cliente extranjero</option>
-      </select></label>
-    <label>¿Tu actividad es…?
-      <select id="act">
-        <option value="1">Profesional (secciones 2ª o 3ª del IAE)</option>
-        <option value="0">Empresarial (comercio, hostelería, reformas…)</option>
-      </select></label>
-    <label>¿Llevas menos de 3 años de alta?
-      <select id="nuevo"><option value="0">No</option><option value="1">Sí</option></select></label>
-  </div>
-  <div class="calc-salida" id="salida"></div>
-</div>
-
-<script>
-(function(){
-  const $ = id => document.getElementById(id);
-  const eur = n => n.toLocaleString("es-ES", {minimumFractionDigits:2, maximumFractionDigits:2}) + " €";
-  function calcula(){
-    const base = parseFloat($("base").value) || 0;
-    const tipo = parseFloat($("terr").value);
-    const retiene = $("cli").value === "1" && $("act").value === "1";
-    const pct = $("nuevo").value === "1" ? 7 : 15;
-    const nombre = tipo === 21 || tipo === 10 || tipo === 4 ? "IVA" : tipo < 0 ? "IPSI" : "IGIC";
-    let filas = `<div class="l"><span>Base imponible</span><b>${eur(base)}</b></div>`;
-    let total = base;
-    if (tipo < 0){
-      filas += `<div class="l"><span>IPSI</span><b>según ordenanza</b></div>`;
-    } else {
-      const imp = base * tipo / 100; total += imp;
-      filas += `<div class="l"><span>+ ${nombre} ${tipo} %</span><b>${eur(imp)}</b></div>`;
-    }
-    let ret = 0;
-    if (retiene){ ret = base * pct / 100; total -= ret;
-      filas += `<div class="l"><span>− Retención IRPF ${pct} %</span><b>−${eur(ret)}</b></div>`;
-    } else {
-      filas += `<div class="l apagado"><span>Sin retención de IRPF</span><b>—</b></div>`;
-    }
-    filas += `<div class="l tot"><span>Total a cobrar</span><b>${eur(total)}</b></div>`;
-    const tuyo = base - 0;
-    filas += `<p class="nota">De ese total, <b>${eur(base)}</b> son tuyos. ` +
-      (tipo > 0 ? `El ${nombre} lo devuelves en tu declaración trimestral. ` : "") +
-      (ret > 0 ? `Los ${eur(ret)} de retención también son tuyos: te los descuentan en la renta.` : "") + `</p>`;
-    if (!retiene && $("act").value === "1" && $("cli").value === "0")
-      filas += `<p class="aviso">A un particular no se le pone retención: no presenta el modelo 111 y no podría ingresarla.</p>`;
-    if (!retiene && $("act").value === "0")
-      filas += `<p class="aviso">Las actividades empresariales no llevan retención de IRPF en factura.</p>`;
-    $("salida").innerHTML = filas;
-  }
-  ["base","terr","cli","act","nuevo"].forEach(id => {
-    $(id).addEventListener("input", calcula); $(id).addEventListener("change", calcula); });
-  calcula();
-})();
-</script>
+<a class="aherr" href="../../herramientas/calculadora-factura-autonomo/">
+  <b>Calculadora de factura de autónomo →</b>
+  <span>Elige tu territorio y tu tipo de cliente, y te dice qué impuesto va, si lleva retención y cuánto cobras de verdad.</span>
+</a>
 
 <h2>¿Por qué cobro menos de lo que pone la factura?</h2>
 

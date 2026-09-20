@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de finiquito e indemnización</title>
+<meta name="description" content="Calcula tu finiquito y tu indemnización según por qué sales de la empresa. Gratis, sin registro y con la normativa española de 2026.">
+<link rel="canonical" href="https://www.zarwealth.tech/herramientas/calculadora-finiquito/">
+<meta property="og:title" content="Calculadora de finiquito e indemnización"><meta property="og:description" content="Calcula tu finiquito y tu indemnización según por qué sales de la empresa. Gratis, sin registro y con la normativa española de 2026.">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://www.zarwealth.tech/herramientas/calculadora-finiquito/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculadora de finiquito e indemnización"><meta name="twitter:description" content="Calcula tu finiquito y tu indemnización según por qué sales de la empresa. Gratis, sin registro y con la normativa española de 2026.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de finiquito e indemnización","description":"Calcula tu finiquito y tu indemnización según por qué sales de la empresa. Gratis, sin registro y con la normativa española de 2026.","applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":"es-ES","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../estilo.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Cómo se calcula cada parte?", "acceptedAnswer": {"@type": "Answer", "text": "Concepto Cómo sale Salario diario Bruto anual ÷ 365 Días del mes (Bruto ÷ pagas ÷ 30) × días trabajados Vacaciones Días pendientes × salario diario Paga extra proporcional (Importe de la paga ÷ 6) × meses devengados Indemnización Días por año × antigüedad × salario diario"}}, {"@type": "Question", "name": "¿Por qué el resultado se corta a veces?", "acceptedAnswer": {"@type": "Answer", "text": "Porque la indemnización tiene topes en mensualidades : 24 en el despido improcedente y 12 en el objetivo. Si tu antigüedad es alta, el cálculo se queda en ese techo por mucho que sumes años. La calculadora te avisa cuando pasa."}}, {"@type": "Question", "name": "¿Y los impuestos?", "acceptedAnswer": {"@type": "Answer", "text": "El finiquito tributa como salario, con su retención. La indemnización está exenta hasta el mínimo legal, con tope de 180.000 € — 183.600 € en el País Vasco desde 2025—. Lo que la empresa pague por encima del mínimo legal, tributa. Los detalles, los casos y las fuentes están en el artículo: cómo se calcula el finiquito según por qué te vas . Revisado el 20 de septiembre de 2026 contra el Estatuto de los Trabajadores (artículos 49, 52, 53, 56) y el artículo 7.e de la Ley del IRPF. Los 33 días está"}}]}</script>
+</head><body>
+
+<header class="cab"><div class="cab-in">
+  <nav><a href="../../es/">Inicio</a> <a href="../">Herramientas</a></nav>
+  <a class="marca" href="../../es/">Zar<span>Wealth</span></a>
+  <span class="hueco"></span>
+</div></header>
+
+<main>
+  <article>
+    <div class="cabecera">
+      <p class="etiqueta">Herramienta gratuita</p>
+      <h1>Calculadora de finiquito e indemnización</h1>
+      <p class="bajada">Calcula tu finiquito y tu indemnización según por qué sales de la empresa. Gratis, sin registro y con la normativa española de 2026.</p>
+    </div>
+    <div class="contenido">
+<p>Rellena tus datos y verás <b>qué parte es finiquito</b> —lo que la empresa te debe siempre— y <b>qué parte es indemnización</b>, que solo se cobra en algunos casos y tiene otro tratamiento fiscal.</p>
+
+<div class="calc">
+  <div class="calc-campos">
+    <label>Salario bruto anual (€)
+      <input type="number" id="bruto" value="30000" min="0" step="1000"></label>
+    <label>Número de pagas al año
+      <select id="pagas"><option value="12">12 (extras prorrateadas)</option>
+        <option value="14" selected>14 (dos pagas extra)</option>
+        <option value="15">15</option><option value="16">16</option></select></label>
+    <label>¿Por qué sales?
+      <select id="motivo">
+        <option value="improcedente">Despido improcedente (33 días/año)</option>
+        <option value="objetivo">Despido objetivo (20 días/año)</option>
+        <option value="temporal">Fin de contrato temporal (12 días/año)</option>
+        <option value="voluntaria">Baja voluntaria (sin indemnización)</option>
+        <option value="disciplinario">Despido disciplinario procedente</option>
+      </select></label>
+    <label>Antigüedad — años
+      <input type="number" id="anios" value="4" min="0" max="50" step="1"></label>
+    <label>…y meses
+      <input type="number" id="meses" value="3" min="0" max="11" step="1"></label>
+    <label>Días trabajados este mes y no cobrados
+      <input type="number" id="diasmes" value="20" min="0" max="31" step="1"></label>
+    <label>Días de vacaciones sin disfrutar
+      <input type="number" id="vacas" value="12" min="0" max="45" step="1"></label>
+    <label>Meses desde que se devengó la paga extra
+      <input type="number" id="devengo" value="3" min="0" max="6" step="1"></label>
+  </div>
+  <div class="calc-salida" id="salida"></div>
+</div>
+
+<h2>¿Cómo se calcula cada parte?</h2>
+
+<div class="desliza"><table>
+  <thead><tr><th>Concepto</th><th>Cómo sale</th></tr></thead>
+  <tbody>
+    <tr><td><b>Salario diario</b></td><td>Bruto anual ÷ 365</td></tr>
+    <tr><td><b>Días del mes</b></td><td>(Bruto ÷ pagas ÷ 30) × días trabajados</td></tr>
+    <tr><td><b>Vacaciones</b></td><td>Días pendientes × salario diario</td></tr>
+    <tr><td><b>Paga extra proporcional</b></td><td>(Importe de la paga ÷ 6) × meses devengados</td></tr>
+    <tr><td><b>Indemnización</b></td><td>Días por año × antigüedad × salario diario</td></tr>
+  </tbody>
+</table></div>
+
+<h2>¿Por qué el resultado se corta a veces?</h2>
+
+<p>Porque la indemnización tiene <b>topes en mensualidades</b>: 24 en el despido improcedente y 12 en el objetivo. Si tu antigüedad es alta, el cálculo se queda en ese techo por mucho que sumes años. La calculadora te avisa cuando pasa.</p>
+
+<h2>¿Y los impuestos?</h2>
+
+<ul>
+  <li>El <b>finiquito tributa</b> como salario, con su retención.</li>
+  <li>La <b>indemnización está exenta</b> hasta el mínimo legal, con tope de 180.000 € —<b>183.600 € en el País Vasco</b> desde 2025—. Lo que la empresa pague por encima del mínimo legal, tributa.</li>
+</ul>
+
+<p>Los detalles, los casos y las fuentes están en el artículo:
+<a href="../../es/calcular-finiquito-segun-motivo/">cómo se calcula el finiquito según por qué te vas</a>.</p>
+
+<p class="mini"><b>Revisado el 20 de septiembre de 2026</b> contra el Estatuto de los Trabajadores
+(artículos 49, 52, 53, 56) y el artículo 7.e de la Ley del IRPF. Los 33 días están en revisión
+por la Carta Social Europea: si ha pasado tiempo, contrasta.</p>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const eur = n => (isFinite(n)?n:0).toLocaleString("es-ES",
+    {minimumFractionDigits:2, maximumFractionDigits:2}) + " €";
+
+  function calcula(d){
+    const diario = d.brutoAnual / 365;
+    const mensual = d.brutoAnual / 12;
+    const porPaga = d.brutoAnual / d.pagas;
+    const dias = (porPaga / 30) * d.diasMesTrabajados;
+    const vacaciones = d.vacacionesPendientes * diario;
+    let extras = 0;
+    if (d.pagas > 12) extras = (porPaga / 6) * d.mesesDesdeDevengo;
+    const finiquito = dias + vacaciones + extras;
+    const antiguedad = d.anios + d.meses / 12;
+    const tabla = {improcedente:33, objetivo:20, temporal:12, voluntaria:0, disciplinario:0};
+    const diasPorAnio = tabla[d.motivo] || 0;
+    let indemnizacion = diasPorAnio * antiguedad * diario;
+    let tope = null;
+    if (d.motivo === "improcedente") tope = 24 * mensual;
+    if (d.motivo === "objetivo")     tope = 12 * mensual;
+    let topeAplicado = false;
+    if (tope !== null && indemnizacion > tope){ indemnizacion = tope; topeAplicado = true; }
+    return {diario, dias, vacaciones, extras, finiquito, indemnizacion,
+            topeAplicado, diasPorAnio, antiguedad, total: finiquito + indemnizacion};
+  }
+
+  function pinta(){
+    const pagas = parseInt($("pagas").value);
+    const x = calcula({
+      brutoAnual: Math.max(0, parseFloat($("bruto").value) || 0),
+      pagas, motivo: $("motivo").value,
+      anios: Math.max(0, parseInt($("anios").value) || 0),
+      meses: Math.max(0, parseInt($("meses").value) || 0),
+      diasMesTrabajados: Math.max(0, parseInt($("diasmes").value) || 0),
+      vacacionesPendientes: Math.max(0, parseInt($("vacas").value) || 0),
+      mesesDesdeDevengo: Math.max(0, parseInt($("devengo").value) || 0),
+    });
+    let h = `<p class="bloque">FINIQUITO <span class="ap">— te lo deben siempre</span></p>`;
+    h += `<div class="l"><span>Días trabajados del mes</span><b>${eur(x.dias)}</b></div>`;
+    h += `<div class="l"><span>Vacaciones no disfrutadas</span><b>${eur(x.vacaciones)}</b></div>`;
+    if (pagas > 12)
+      h += `<div class="l"><span>Paga extra proporcional</span><b>${eur(x.extras)}</b></div>`;
+    else
+      h += `<div class="l apagado"><span>Paga extra (ya prorrateada en nómina)</span><b>—</b></div>`;
+    h += `<div class="l sub"><span>Subtotal finiquito</span><b>${eur(x.finiquito)}</b></div>`;
+
+    h += `<p class="bloque">INDEMNIZACIÓN <span class="ap">— solo en algunos casos</span></p>`;
+    if (x.diasPorAnio === 0){
+      h += `<div class="l apagado"><span>No corresponde indemnización</span><b>0,00 €</b></div>`;
+    } else {
+      h += `<div class="l"><span>${x.diasPorAnio} días × ${x.antiguedad.toFixed(2)} años × ${eur(x.diario)}</span><b>${eur(x.indemnizacion)}</b></div>`;
+    }
+    h += `<div class="l tot"><span>TOTAL</span><b>${eur(x.total)}</b></div>`;
+
+    if (x.topeAplicado)
+      h += `<p class="aviso">Se ha aplicado el tope legal (${$("motivo").value === "improcedente" ? "24" : "12"} mensualidades). Sin él saldría más, pero la ley lo limita ahí.</p>`;
+    if ($("motivo").value === "voluntaria")
+      h += `<p class="aviso">Si te vas tú no hay indemnización. Y si tu convenio exige preaviso y no lo cumples, la empresa puede descontarte esos días.</p>`;
+    if ($("motivo").value === "disciplinario")
+      h += `<p class="aviso">Un despido disciplinario procedente no genera indemnización. Si crees que no está justificado, tienes 20 días hábiles para impugnarlo.</p>`;
+    h += `<p class="nota">El <b>finiquito (${eur(x.finiquito)})</b> tributa en el IRPF como salario. La <b>indemnización (${eur(x.indemnizacion)})</b> está exenta hasta el mínimo legal, con tope de 180.000 € (183.600 € en el País Vasco).</p>`;
+    $("salida").innerHTML = h;
+  }
+
+  ["bruto","pagas","motivo","anios","meses","diasmes","vacas","devengo"].forEach(id=>{
+    $(id).addEventListener("input", pinta); $(id).addEventListener("change", pinta); });
+  pinta();
+  window.__calcFiniquito = calcula;   // para poder probarlo desde fuera
+})();
+</script>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <p><b>ZarWealth</b> — Dinero, con números y sin humo.</p>
+  <p class="mini">Cálculo orientativo con la normativa vigente. No sustituye a un
+  profesional: si hay mucho en juego, contrástalo.</p>
+</footer>
+</body></html>

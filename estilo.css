@@ -98,3 +98,16 @@ footer .mini{font-size:.8rem;opacity:.75}
   font-size:1.12rem;color:var(--verde)}
 .calc-salida .nota{font-size:.85rem;color:var(--apagado);margin:.9rem 0 0;line-height:1.5}
 .calc-salida .aviso{font-size:.85rem;color:#fbbf24;margin:.6rem 0 0;line-height:1.5}
+
+/* bloques dentro del resultado de una calculadora */
+.calc-salida .bloque{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--verde);margin:1.2rem 0 .5rem;padding-top:.8rem;border-top:1px solid var(--linea)}
+.calc-salida .bloque:first-child{margin-top:0;padding-top:0;border-top:0}
+.calc-salida .bloque .ap{font-weight:400;letter-spacing:0;text-transform:none;color:var(--apagado)}
+.calc-salida .l.sub{border-top:1px dashed var(--linea);margin-top:.4rem;padding-top:.55rem;font-weight:600}
+/* enlace a la herramienta desde el artículo */
+.aherr{display:block;background:rgba(34,197,94,.09);border:1px solid rgba(34,197,94,.3);
+  border-radius:10px;padding:1.1rem 1.3rem;margin:2rem 0;text-decoration:none}
+.aherr:hover{background:rgba(34,197,94,.14);text-decoration:none}
+.aherr b{display:block;color:var(--verde);font-size:1.05rem;margin-bottom:.25rem}
+.aherr span{color:var(--apagado);font-size:.9rem}

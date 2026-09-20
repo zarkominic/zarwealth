@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de factura de autónomo (IVA, IGIC e IRPF)</title>
+<meta name="description" content="Calcula tu factura con el impuesto que te toca según el territorio y la retención de IRPF que corresponda. Gratis y sin registro.">
+<link rel="canonical" href="https://www.zarwealth.tech/herramientas/calculadora-factura-autonomo/">
+<meta property="og:title" content="Calculadora de factura de autónomo (IVA, IGIC e IRPF)"><meta property="og:description" content="Calcula tu factura con el impuesto que te toca según el territorio y la retención de IRPF que corresponda. Gratis y sin registro.">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://www.zarwealth.tech/herramientas/calculadora-factura-autonomo/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculadora de factura de autónomo (IVA, IGIC e IRPF)"><meta name="twitter:description" content="Calcula tu factura con el impuesto que te toca según el territorio y la retención de IRPF que corresponda. Gratis y sin registro.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de factura de autónomo (IVA, IGIC e IRPF)","description":"Calcula tu factura con el impuesto que te toca según el territorio y la retención de IRPF que corresponda. Gratis y sin registro.","applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":"es-ES","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../estilo.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Qué impuesto me toca según dónde esté?", "acceptedAnswer": {"@type": "Answer", "text": "Territorio Impuesto Tipo general Modelo Península y Baleares IVA 21 % 303 (AEAT) Canarias IGIC 7 % 420 (ATC) Ceuta y Melilla IPSI 3-4 % servicios ordenanza local"}}, {"@type": "Question", "name": "¿Cuándo llevo retención de IRPF?", "acceptedAnswer": {"@type": "Answer", "text": "Solo si se cumplen las dos condiciones a la vez : que tu actividad sea profesional y que el cliente sea empresa, autónomo o entidad pública. A un particular nunca, porque no presenta el modelo 111 y no podría ingresarla. Todo el detalle, con las excepciones y las fuentes, en el artículo: cómo se hace una factura de autónomo según dónde estés . Revisado el 20 de septiembre de 2026 contra la Ley 37/1992 del IVA, la Ley 20/1991 del REF canario y el artículo 95 del Reglamento del IRPF. (function(){ "}}]}</script>
+</head><body>
+
+<header class="cab"><div class="cab-in">
+  <nav><a href="../../es/">Inicio</a> <a href="../">Herramientas</a></nav>
+  <a class="marca" href="../../es/">Zar<span>Wealth</span></a>
+  <span class="hueco"></span>
+</div></header>
+
+<main>
+  <article>
+    <div class="cabecera">
+      <p class="etiqueta">Herramienta gratuita</p>
+      <h1>Calculadora de factura de autónomo (IVA, IGIC e IRPF)</h1>
+      <p class="bajada">Calcula tu factura con el impuesto que te toca según el territorio y la retención de IRPF que corresponda. Gratis y sin registro.</p>
+    </div>
+    <div class="contenido">
+<p>En España <b>el IVA no se aplica en todo el territorio</b>: Canarias tiene IGIC y Ceuta y Melilla, IPSI. Y la retención de IRPF solo va en algunos casos. Esta calculadora tiene en cuenta las dos cosas.</p>
+
+<div class="calc">
+  <div class="calc-campos">
+    <label>Base imponible (€)
+      <input type="number" id="base" value="1000" min="0" step="50"></label>
+    <label>¿Dónde tienes tu actividad?
+      <select id="terr">
+        <option value="21">Península o Baleares — IVA 21 %</option>
+        <option value="10">Península o Baleares — IVA 10 %</option>
+        <option value="4">Península o Baleares — IVA 4 %</option>
+        <option value="7">Canarias — IGIC 7 %</option>
+        <option value="3">Canarias — IGIC 3 %</option>
+        <option value="0">Canarias — IGIC 0 %</option>
+        <option value="-1">Ceuta o Melilla — IPSI</option>
+        <option value="-2">Exportación (cliente fuera de tu territorio)</option>
+      </select></label>
+    <label>¿Quién es tu cliente?
+      <select id="cli">
+        <option value="1">Empresa, autónomo o entidad pública (España)</option>
+        <option value="0">Particular</option>
+        <option value="0">Cliente extranjero</option>
+      </select></label>
+    <label>¿Tu actividad es…?
+      <select id="act">
+        <option value="1">Profesional (secciones 2ª o 3ª del IAE)</option>
+        <option value="0">Empresarial (comercio, hostelería, reformas…)</option>
+      </select></label>
+    <label>¿Llevas menos de 3 años de alta?
+      <select id="nuevo"><option value="0">No</option><option value="1">Sí</option></select></label>
+  </div>
+  <div class="calc-salida" id="salida"></div>
+</div>
+
+<h2>¿Qué impuesto me toca según dónde esté?</h2>
+
+<div class="desliza"><table>
+  <thead><tr><th>Territorio</th><th>Impuesto</th><th>Tipo general</th><th>Modelo</th></tr></thead>
+  <tbody>
+    <tr><td>Península y Baleares</td><td>IVA</td><td>21 %</td><td>303 (AEAT)</td></tr>
+    <tr><td>Canarias</td><td>IGIC</td><td>7 %</td><td>420 (ATC)</td></tr>
+    <tr><td>Ceuta y Melilla</td><td>IPSI</td><td>3-4 % servicios</td><td>ordenanza local</td></tr>
+  </tbody>
+</table></div>
+
+<h2>¿Cuándo llevo retención de IRPF?</h2>
+
+<p>Solo si se cumplen <b>las dos condiciones a la vez</b>: que tu actividad sea profesional y que el cliente sea empresa, autónomo o entidad pública. A un particular nunca, porque no presenta el modelo 111 y no podría ingresarla.</p>
+
+<p>Todo el detalle, con las excepciones y las fuentes, en el artículo:
+<a href="../../es/factura-autonomo-irpf-iva-igic/">cómo se hace una factura de autónomo según dónde estés</a>.</p>
+
+<p class="mini"><b>Revisado el 20 de septiembre de 2026</b> contra la Ley 37/1992 del IVA,
+la Ley 20/1991 del REF canario y el artículo 95 del Reglamento del IRPF.</p>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const eur = n => (isFinite(n)?n:0).toLocaleString("es-ES",
+    {minimumFractionDigits:2, maximumFractionDigits:2}) + " €";
+
+  function calcula(d){
+    const retiene = d.clienteRetiene && d.profesional;
+    const pct = d.nuevo ? 7 : 15;
+    const ret = retiene ? d.base * pct / 100 : 0;
+    let impuesto = 0, nombre = "";
+    if (d.tipo >= 0){
+      impuesto = d.base * d.tipo / 100;
+      nombre = (d.tipo === 21 || d.tipo === 10 || d.tipo === 4) ? "IVA" : "IGIC";
+    } else if (d.tipo === -1){ nombre = "IPSI"; }
+    else { nombre = "exportación"; }
+    return {impuesto, nombre, ret, pct, retiene,
+            total: d.base + impuesto - ret, tuyo: d.base};
+  }
+
+  function pinta(){
+    const base = Math.max(0, parseFloat($("base").value) || 0);
+    const tipo = parseFloat($("terr").value);
+    const x = calcula({base, tipo,
+      clienteRetiene: $("cli").value === "1",
+      profesional: $("act").value === "1",
+      nuevo: $("nuevo").value === "1"});
+
+    let h = `<div class="l"><span>Base imponible</span><b>${eur(base)}</b></div>`;
+    if (tipo >= 0)
+      h += `<div class="l"><span>+ ${x.nombre} ${tipo} %</span><b>${eur(x.impuesto)}</b></div>`;
+    else if (tipo === -1)
+      h += `<div class="l apagado"><span>IPSI — según la ordenanza de tu ciudad</span><b>—</b></div>`;
+    else
+      h += `<div class="l apagado"><span>Exportación: sin impuesto indirecto</span><b>—</b></div>`;
+    if (x.retiene)
+      h += `<div class="l"><span>− Retención IRPF ${x.pct} %</span><b>−${eur(x.ret)}</b></div>`;
+    else
+      h += `<div class="l apagado"><span>Sin retención de IRPF</span><b>—</b></div>`;
+    h += `<div class="l tot"><span>Total a cobrar</span><b>${eur(x.total)}</b></div>`;
+
+    if (!x.retiene && $("act").value === "1" && $("cli").value === "0")
+      h += `<p class="aviso">A un particular no se le pone retención: no presenta el modelo 111 y no podría ingresarla.</p>`;
+    if (!x.retiene && $("act").value === "0")
+      h += `<p class="aviso">Las actividades empresariales no llevan retención de IRPF en factura.</p>`;
+    if (tipo === -2)
+      h += `<p class="aviso">Facturar de la Península a Canarias, Ceuta o Melilla es una exportación: sin IVA, con la mención de exención, y <b>fuera del modelo 349</b>.</p>`;
+    h += `<p class="nota">De ese total, <b>${eur(x.tuyo)}</b> son tuyos. ${tipo > 0 ? `El ${x.nombre} lo devuelves en tu declaración trimestral. ` : ""}${x.ret > 0 ? `Los ${eur(x.ret)} de retención también son tuyos: te los descuentan en la renta.` : ""}</p>`;
+    $("salida").innerHTML = h;
+  }
+
+  ["base","terr","cli","act","nuevo"].forEach(id=>{
+    $(id).addEventListener("input", pinta); $(id).addEventListener("change", pinta); });
+  pinta();
+  window.__calcFactura = calcula;
+})();
+</script>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <p><b>ZarWealth</b> — Dinero, con números y sin humo.</p>
+  <p class="mini">Cálculo orientativo con la normativa vigente. No sustituye a un
+  profesional: si hay mucho en juego, contrástalo.</p>
+</footer>
+</body></html>
