@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../estilo.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Cómo se calcula cada parte?", "acceptedAnswer": {"@type": "Answer", "text": "Concepto Cómo sale Salario diario Bruto anual ÷ 365 Días del mes (Bruto ÷ pagas ÷ 30) × días trabajados Vacaciones Días pendientes × salario diario Paga extra proporcional (Importe de la paga ÷ 6) × meses devengados Indemnización Días por año × antigüedad × salario diario"}}, {"@type": "Question", "name": "¿Por qué el resultado se corta a veces?", "acceptedAnswer": {"@type": "Answer", "text": "Porque la indemnización tiene topes en mensualidades : 24 en el despido improcedente y 12 en el objetivo. Si tu antigüedad es alta, el cálculo se queda en ese techo por mucho que sumes años. La calculadora te avisa cuando pasa."}}, {"@type": "Question", "name": "¿Y los impuestos?", "acceptedAnswer": {"@type": "Answer", "text": "El finiquito tributa como salario, con su retención. La indemnización está exenta hasta el mínimo legal, con tope de 180.000 € — 183.600 € en el País Vasco desde 2025—. Lo que la empresa pague por encima del mínimo legal, tributa. Los detalles, los casos y las fuentes están en el artículo: cómo se calcula el finiquito según por qué te vas . Revisado el 20 de septiembre de 2026 contra el Estatuto de los Trabajadores (artículos 49, 52, 53, 56) y el artículo 7.e de la Ley del IRPF. Los 33 días está"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Cómo se calcula cada parte?", "acceptedAnswer": {"@type": "Answer", "text": "Concepto Cómo sale Salario diario Bruto anual ÷ 365 Días del mes (Bruto ÷ pagas ÷ 30) × días trabajados Vacaciones Días pendientes × salario diario Paga extra proporcional (Importe de la paga ÷ 6) × meses generados «Generados» es lo que en las nóminas aparece como devengados : los meses que llevas acumulando esa paga desde que empezó su periodo. Si te pagan en junio y diciembre, cuenta desde el último de esos meses. Indemnización Días por año × antigüedad × salario diario"}}, {"@type": "Question", "name": "¿Por qué el resultado se corta a veces?", "acceptedAnswer": {"@type": "Answer", "text": "Porque la indemnización tiene topes en mensualidades : 24 en el despido improcedente y 12 en el objetivo. Si tu antigüedad es alta, el cálculo se queda en ese techo por mucho que sumes años. La calculadora te avisa cuando pasa."}}, {"@type": "Question", "name": "¿Y los impuestos?", "acceptedAnswer": {"@type": "Answer", "text": "El finiquito tributa como salario, con su retención. La indemnización está exenta hasta el mínimo legal, con tope de 180.000 € — 183.600 € en el País Vasco desde 2025—. Lo que la empresa pague por encima del mínimo legal, tributa. Los detalles, los casos y las fuentes están en el artículo: cómo se calcula el finiquito según por qué te vas ."}}]}</script>
 </head><body>
 
 <header class="cab"><div class="cab-in">
@@ -57,7 +57,7 @@
       <input type="number" id="diasmes" value="20" min="0" max="31" step="1"></label>
     <label>Días de vacaciones sin disfrutar
       <input type="number" id="vacas" value="12" min="0" max="45" step="1"></label>
-    <label>Meses desde que se devengó la paga extra
+    <label>Meses que llevas generando la paga extra
       <input type="number" id="devengo" value="3" min="0" max="6" step="1"></label>
   </div>
   <div class="calc-salida" id="salida"></div>
@@ -71,7 +71,7 @@
     <tr><td><b>Salario diario</b></td><td>Bruto anual ÷ 365</td></tr>
     <tr><td><b>Días del mes</b></td><td>(Bruto ÷ pagas ÷ 30) × días trabajados</td></tr>
     <tr><td><b>Vacaciones</b></td><td>Días pendientes × salario diario</td></tr>
-    <tr><td><b>Paga extra proporcional</b></td><td>(Importe de la paga ÷ 6) × meses devengados</td></tr>
+    <tr><td><b>Paga extra proporcional</b></td><td>(Importe de la paga ÷ 6) × meses generados</td></tr><tr><td colspan="2" class="mini">«Generados» es lo que en las nóminas aparece como <b>devengados</b>: los meses que llevas acumulando esa paga desde que empezó su periodo. Si te pagan en junio y diciembre, cuenta desde el último de esos meses.</td></tr>
     <tr><td><b>Indemnización</b></td><td>Días por año × antigüedad × salario diario</td></tr>
   </tbody>
 </table></div>
@@ -89,6 +89,12 @@
 
 <p>Los detalles, los casos y las fuentes están en el artículo:
 <a href="../../es/calcular-finiquito-segun-motivo/">cómo se calcula el finiquito según por qué te vas</a>.</p>
+
+<h2>Otras herramientas</h2>
+<ul>
+  <li><a href="../calculadora-factura-autonomo/">Calculadora de factura de autónomo</a></li>
+  <li><a href="../">Todas las calculadoras</a></li>
+</ul>
 
 <p class="mini"><b>Revisado el 20 de septiembre de 2026</b> contra el Estatuto de los Trabajadores
 (artículos 49, 52, 53, 56) y el artículo 7.e de la Ley del IRPF. Los 33 días están en revisión
