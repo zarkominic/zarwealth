@@ -14,7 +14,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../estilo.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Qué impuesto me toca según dónde esté?", "acceptedAnswer": {"@type": "Answer", "text": "Territorio Impuesto Tipo general Modelo Península y Baleares IVA 21 % 303 (AEAT) Canarias IGIC 7 % 420 (ATC) Ceuta y Melilla IPSI 3-4 % servicios ordenanza local"}}, {"@type": "Question", "name": "¿Cuándo llevo retención de IRPF?", "acceptedAnswer": {"@type": "Answer", "text": "Solo si se cumplen las dos condiciones a la vez : que tu actividad sea profesional y que el cliente sea empresa, autónomo o entidad pública. A un particular nunca, porque no presenta el modelo 111 y no podría ingresarla. Todo el detalle, con las excepciones y las fuentes, en el artículo: cómo se hace una factura de autónomo según dónde estés . Revisado el 20 de septiembre de 2026 contra la Ley 37/1992 del IVA, la Ley 20/1991 del REF canario y el artículo 95 del Reglamento del IRPF. (function(){ "}}]}</script>
 </head><body>
 
 <header class="cab"><div class="cab-in">
@@ -39,20 +38,32 @@
       <input type="number" id="base" value="1000" min="0" step="50"></label>
     <label>¿Dónde tienes tu actividad?
       <select id="terr">
-        <option value="21">Península o Baleares — IVA 21 %</option>
-        <option value="10">Península o Baleares — IVA 10 %</option>
-        <option value="4">Península o Baleares — IVA 4 %</option>
-        <option value="7">Canarias — IGIC 7 %</option>
-        <option value="3">Canarias — IGIC 3 %</option>
-        <option value="0">Canarias — IGIC 0 %</option>
-        <option value="-1">Ceuta o Melilla — IPSI</option>
-        <option value="-2">Exportación (cliente fuera de tu territorio)</option>
+        <optgroup label="Territorio con IVA">
+          <option value="iva">Andalucía</option><option value="iva">Aragón</option>
+          <option value="iva">Asturias</option><option value="iva">Baleares</option>
+          <option value="iva">Cantabria</option><option value="iva">Castilla-La Mancha</option>
+          <option value="iva">Castilla y León</option><option value="iva">Cataluña</option>
+          <option value="iva">Comunidad Valenciana</option><option value="iva">Extremadura</option>
+          <option value="iva">Galicia</option><option value="iva">La Rioja</option>
+          <option value="iva" selected>Madrid</option><option value="iva">Murcia</option>
+          <option value="iva">Navarra</option><option value="iva">País Vasco</option>
+        </optgroup>
+        <optgroup label="Territorio con IGIC">
+          <option value="igic">Canarias</option>
+        </optgroup>
+        <optgroup label="Territorio con IPSI">
+          <option value="ipsi">Ceuta</option><option value="ipsi">Melilla</option>
+        </optgroup>
       </select></label>
+    <label id="lblTipo">¿Qué tipo aplicas?
+      <select id="tipo"></select>
+      <span class="ayuda" id="ayudaTipo"></span></label>
     <label>¿Quién es tu cliente?
       <select id="cli">
-        <option value="1">Empresa, autónomo o entidad pública (España)</option>
-        <option value="0">Particular</option>
-        <option value="0">Cliente extranjero</option>
+        <option value="empresa">Una empresa o autónomo de mi mismo territorio</option>
+        <option value="particular">Un particular</option>
+        <option value="otroterr">Una empresa de otro territorio español (p. ej. yo en Madrid y el cliente en Canarias)</option>
+        <option value="extranjero">Un cliente de fuera de España</option>
       </select></label>
     <label>¿Tu actividad es…?
       <select id="act">
@@ -92,54 +103,99 @@ la Ley 20/1991 del REF canario y el artículo 95 del Reglamento del IRPF.</p>
   const eur = n => (isFinite(n)?n:0).toLocaleString("es-ES",
     {minimumFractionDigits:2, maximumFractionDigits:2}) + " €";
 
+  /* Los tipos NO dependen del territorio sino de lo que vendes, así que van
+     en su propio campo y con ayuda: nadie se sabe si su servicio es 21 o 10. */
+  const TIPOS = {
+    iva: [
+      {v:21, txt:"21 % — general", ej:"La mayoría de servicios profesionales: consultoría, diseño, informática, abogacía, marketing."},
+      {v:10, txt:"10 % — reducido", ej:"Hostelería, transporte de viajeros, reformas en vivienda, peluquería, entradas a espectáculos."},
+      {v:4,  txt:"4 % — superreducido", ej:"Pan, leche, huevos, frutas y verduras, libros, prensa, medicamentos."},
+      {v:0,  txt:"Exento de IVA", ej:"Sanidad, educación reglada, seguros. Aunque no lleve IVA, la retención de IRPF sí se aplica."},
+    ],
+    igic: [
+      {v:7,  txt:"7 % — general", ej:"La mayoría de servicios profesionales en Canarias."},
+      {v:3,  txt:"3 % — reducido", ej:"Industria, transporte, algunos bienes."},
+      {v:0,  txt:"0 % — tipo cero", ej:"Pan, leche, libros, medicamentos, vivienda protegida."},
+      {v:15, txt:"15 % — incrementado", ej:"Algunos bienes concretos; vigente desde 2026."},
+      {v:20, txt:"20 % — especial", ej:"Labores del tabaco y otros supuestos tasados."},
+    ],
+    ipsi: [
+      {v:-1, txt:"Según la ordenanza de tu ciudad", ej:"Ceuta y Melilla fijan sus tipos por ordenanza: del 0,5 % al 10 % según la actividad. Consúltala."},
+    ],
+  };
+  const NOMBRE = {iva:"IVA", igic:"IGIC", ipsi:"IPSI"};
+
+  function rellenaTipos(){
+    const fam = $("terr").value;
+    const previo = parseFloat($("tipo").value);
+    $("tipo").innerHTML = TIPOS[fam].map(o =>
+      `<option value="${o.v}">${o.txt}</option>`).join("");
+    // si el tipo anterior existe en la nueva familia, se conserva
+    if (TIPOS[fam].some(o => o.v === previo)) $("tipo").value = previo;
+    ayuda();
+  }
+  function ayuda(){
+    const fam = $("terr").value, v = parseFloat($("tipo").value);
+    const o = TIPOS[fam].find(x => x.v === v);
+    $("ayudaTipo").textContent = o ? o.ej : "";
+  }
+
   function calcula(d){
     const retiene = d.clienteRetiene && d.profesional;
     const pct = d.nuevo ? 7 : 15;
     const ret = retiene ? d.base * pct / 100 : 0;
-    let impuesto = 0, nombre = "";
-    if (d.tipo >= 0){
-      impuesto = d.base * d.tipo / 100;
-      nombre = (d.tipo === 21 || d.tipo === 10 || d.tipo === 4) ? "IVA" : "IGIC";
-    } else if (d.tipo === -1){ nombre = "IPSI"; }
-    else { nombre = "exportación"; }
-    return {impuesto, nombre, ret, pct, retiene,
-            total: d.base + impuesto - ret, tuyo: d.base};
+    let impuesto = 0;
+    if (!d.exportacion && d.tipo > 0) impuesto = d.base * d.tipo / 100;
+    return {impuesto, ret, pct, retiene, total: d.base + impuesto - ret, tuyo: d.base};
   }
 
   function pinta(){
     const base = Math.max(0, parseFloat($("base").value) || 0);
-    const tipo = parseFloat($("terr").value);
-    const x = calcula({base, tipo,
-      clienteRetiene: $("cli").value === "1",
-      profesional: $("act").value === "1",
-      nuevo: $("nuevo").value === "1"});
+    const fam = $("terr").value;
+    const tipo = parseFloat($("tipo").value);
+    const cliente = $("cli").value;
+    const exportacion = cliente === "otroterr" || cliente === "extranjero";
+    const clienteRetiene = cliente === "empresa";   // solo empresa española del mismo territorio
+    const x = calcula({base, tipo, exportacion, clienteRetiene,
+      profesional: $("act").value === "1", nuevo: $("nuevo").value === "1"});
+    const nombre = NOMBRE[fam];
 
     let h = `<div class="l"><span>Base imponible</span><b>${eur(base)}</b></div>`;
-    if (tipo >= 0)
-      h += `<div class="l"><span>+ ${x.nombre} ${tipo} %</span><b>${eur(x.impuesto)}</b></div>`;
-    else if (tipo === -1)
+    if (exportacion)
+      h += `<div class="l apagado"><span>Sin ${nombre}: la operación va exenta</span><b>—</b></div>`;
+    else if (fam === "ipsi")
       h += `<div class="l apagado"><span>IPSI — según la ordenanza de tu ciudad</span><b>—</b></div>`;
+    else if (tipo === 0)
+      h += `<div class="l apagado"><span>Operación exenta de ${nombre}</span><b>0,00 €</b></div>`;
     else
-      h += `<div class="l apagado"><span>Exportación: sin impuesto indirecto</span><b>—</b></div>`;
+      h += `<div class="l"><span>+ ${nombre} ${tipo} %</span><b>${eur(x.impuesto)}</b></div>`;
+
     if (x.retiene)
       h += `<div class="l"><span>− Retención IRPF ${x.pct} %</span><b>−${eur(x.ret)}</b></div>`;
     else
       h += `<div class="l apagado"><span>Sin retención de IRPF</span><b>—</b></div>`;
     h += `<div class="l tot"><span>Total a cobrar</span><b>${eur(x.total)}</b></div>`;
 
-    if (!x.retiene && $("act").value === "1" && $("cli").value === "0")
+    if (cliente === "otroterr")
+      h += `<p class="aviso">Facturar entre la Península, Canarias, Ceuta o Melilla es una <b>exportación</b>, aunque el cliente sea español y pague en euros: sin impuesto indirecto, con la mención de exención, y <b>fuera del modelo 349</b>.</p>`;
+    if (cliente === "extranjero")
+      h += `<p class="aviso">A cliente extranjero no va impuesto indirecto ni retención. Si es empresa de la UE, revisa el modelo 349 y el ROI.</p>`;
+    if (cliente === "particular" && $("act").value === "1")
       h += `<p class="aviso">A un particular no se le pone retención: no presenta el modelo 111 y no podría ingresarla.</p>`;
-    if (!x.retiene && $("act").value === "0")
+    if ($("act").value === "0")
       h += `<p class="aviso">Las actividades empresariales no llevan retención de IRPF en factura.</p>`;
-    if (tipo === -2)
-      h += `<p class="aviso">Facturar de la Península a Canarias, Ceuta o Melilla es una exportación: sin IVA, con la mención de exención, y <b>fuera del modelo 349</b>.</p>`;
-    h += `<p class="nota">De ese total, <b>${eur(x.tuyo)}</b> son tuyos. ${tipo > 0 ? `El ${x.nombre} lo devuelves en tu declaración trimestral. ` : ""}${x.ret > 0 ? `Los ${eur(x.ret)} de retención también son tuyos: te los descuentan en la renta.` : ""}</p>`;
+    if (["Navarra","País Vasco"].includes($("terr").selectedOptions[0].textContent))
+      h += `<p class="aviso">En ${$("terr").selectedOptions[0].textContent} los porcentajes son los mismos, pero presentas ante tu hacienda foral con sus propios modelos y plazos.</p>`;
+
+    h += `<p class="nota">De ese total, <b>${eur(x.tuyo)}</b> son tuyos. ${!exportacion && tipo > 0 ? `El ${nombre} lo devuelves en tu declaración trimestral. ` : ""}${x.ret > 0 ? `Los ${eur(x.ret)} de retención también son tuyos: te los descuentan en la renta.` : ""}</p>`;
     $("salida").innerHTML = h;
   }
 
-  ["base","terr","cli","act","nuevo"].forEach(id=>{
+  $("terr").addEventListener("change", () => { rellenaTipos(); pinta(); });
+  $("tipo").addEventListener("change", () => { ayuda(); pinta(); });
+  ["base","cli","act","nuevo"].forEach(id=>{
     $(id).addEventListener("input", pinta); $(id).addEventListener("change", pinta); });
-  pinta();
+  rellenaTipos(); pinta();
   window.__calcFactura = calcula;
 })();
 </script>
