@@ -214,31 +214,26 @@ footer .mini{font-size:var(--text-xs);color:var(--color-muted)}
 
 .inicio footer{margin-top:0}
 
-/* ── artículo en PC: rejilla simétrica de tres columnas. La cabecera (título,
-   entradilla, firma) y la portada ocupan todo el ancho. En el centro una
-   sola columna de lectura (44rem) donde empiezan y acaban los párrafos, las cajas y las tablas, todos al mismo borde. A
-   la izquierda el índice fijo y a la derecha los relacionados (los pone
-   lateral.py). Solo la portada ocupa las tres columnas. En pantallas
-   estrechas los laterales no aparecen y queda una columna. ── */
+/* ── artículo en PC: se usa el ancho. La cabecera (título, entradilla,
+   firma) y la portada ocupan todo el ancho del contenedor. Debajo, una
+   rejilla de dos columnas: a la izquierda un lateral fijo con el índice y
+   los relacionados (lateral.py); a la derecha el texto, que ocupa todo el
+   resto, con letra más grande para que la línea larga se lea bien. Todo lo
+   del texto (párrafos, cajas, tablas) comparte el mismo borde y ancho. En
+   pantallas estrechas el lateral no aparece y queda una columna. ── */
 .lateral{display:none}
 @media (min-width:72rem){
   article:has(> .lateral){max-width:none;display:grid;
-    grid-template-columns:minmax(0,14rem) minmax(0,44rem) minmax(0,14rem);
-    column-gap:clamp(2rem,3.5cqi,4rem);justify-content:center;align-items:start}
+    grid-template-columns:minmax(0,15rem) minmax(0,1fr);column-gap:clamp(2.5rem,4cqi,4.5rem);align-items:start}
   article:has(> .lateral) > *{grid-column:2;min-width:0}
   article:has(> .lateral) > :is(.cabecera,.portada,.credito){grid-column:1/-1}
   article:has(> .lateral) > .portada{width:100%;margin:0 0 var(--space-xl);translate:none}
   article:has(> .lateral) > .lateral{grid-column:1;grid-row:span 400;display:block;position:sticky;top:var(--space-lg);
     max-height:calc(100dvh - 2 * var(--space-lg));overflow-y:auto;padding-right:var(--space-xs)}
-  article:has(> .lateral) > .lateral--rel{grid-column:3}
-  article:has(> .lateral) > .cabecera{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);
-    grid-template-rows:1fr auto auto;column-gap:clamp(2rem,4cqi,4.5rem);align-items:end}
-  article:has(> .lateral) .cabecera h1{grid-column:1;grid-row:1/-1;width:auto;max-width:none;margin:0;
-    font-size:clamp(2.75rem,4.4cqi,4.5rem)}
-  article:has(> .lateral) .cabecera > :not(h1){grid-column:2}
-  article:has(> .lateral) .bajada{grid-row:1;max-width:none;margin:0 0 var(--space-md)}
-  article:has(> .lateral) .contenido{font-size:1.1875rem;line-height:1.65}
-  article:has(> .lateral) :is(.contenido, .contenido > :is(p,ul,ol,div,blockquote,figure,section), article > :is(p,ul,ol,div,blockquote)){max-width:none}
+  article:has(> .lateral) .cabecera h1{width:auto;max-width:none;font-size:clamp(2.75rem,4.4cqi,4.75rem)}
+  article:has(> .lateral) .bajada{max-width:none}
+  article:has(> .lateral) .contenido{font-size:1.25rem;line-height:1.7}
+  article:has(> .lateral) :is(.contenido, .contenido > :is(p,ul,ol,div,blockquote,figure,section,h2,h3), article > :is(p,ul,ol,div,blockquote,h2,h3)){max-width:none}
   article:has(> .lateral) :is(table,.desliza,.calc){width:100% !important;left:auto;translate:none}
 }
 .lateral-t{font-size:var(--text-sm);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-xs)}
