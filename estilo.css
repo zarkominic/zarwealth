@@ -170,7 +170,15 @@ footer .mini{font-size:var(--text-xs);color:var(--color-muted)}
 .inicio .seccion--banda{background:var(--color-paper-2);border-block:var(--rule-hair) solid var(--color-rule);padding-block:var(--section-gap-s);margin-bottom:var(--section-gap)}
 .heroe{padding-block:var(--space-2xl) var(--section-gap-s)}
 .heroe .container{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-xl);align-items:center}
-@media (min-width:60rem){.heroe .container{grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:var(--space-2xl);min-height:calc(100dvh - 76px - 2 * var(--space-2xl))}}
+/* en PC, como en los artículos: lema, frase y botones centrados arriba y la
+   foto a todo el ancho debajo, en formato apaisado */
+@media (min-width:60rem){
+  .heroe .container > div:first-child{text-align:center}
+  .heroe h1{max-width:18ch;margin-inline:auto;text-wrap:balance}
+  .heroe .container .lead{margin:var(--space-lg) auto var(--space-xl);text-align:center}
+  .heroe .acciones{justify-content:center}
+  .heroe [data-slot]{aspect-ratio:21/8}
+}
 .heroe h1{font-size:var(--text-display);line-height:1;max-width:14ch;color:var(--color-ink)}
 .heroe .lead{margin:var(--space-lg) 0 var(--space-xl);color:var(--color-ink-2)}
 .acciones{display:flex;flex-wrap:wrap;gap:var(--space-sm)}
