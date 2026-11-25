@@ -31,6 +31,7 @@
       <h1>Calculadora de factura de autónomo (IVA, IGIC e IRPF)</h1>
       <p class="bajada">Calcula tu factura con el impuesto que te toca según el territorio y la retención de IRPF que corresponda. Gratis y sin registro.</p>
     </div>
+    <aside class="lateral"><nav aria-label="En esta página"><p class="lateral-t">En esta página</p><ol><li><a href="#que-impuesto-me-toca-segun-donde-este">¿Qué impuesto me toca según dónde esté?</a></li><li><a href="#cuando-llevo-retencion-de-irpf">¿Cuándo llevo retención de IRPF?</a></li><li><a href="#otras-herramientas">Otras herramientas</a></li></ol></nav><div class="lateral-rel"><p class="lateral-t">Relacionados</p><ul><li><a href="/es/factura-autonomo-irpf-iva-igic/">Cómo se hace una factura de autónomo según dónde estés</a></li><li><a href="/herramientas/calculadora-finiquito/">Calculadora de finiquito e indemnización</a></li></ul></div></aside>
     <div class="contenido">
 <p>En España <b>el IVA no se aplica en todo el territorio</b>: Canarias tiene IGIC y Ceuta y Melilla, IPSI. Y la retención de IRPF solo va en algunos casos. Esta calculadora tiene en cuenta las dos cosas.</p>
 
@@ -78,7 +79,7 @@
   <div class="calc-salida" id="salida"></div>
 </div>
 
-<h2>¿Qué impuesto me toca según dónde esté?</h2>
+<h2 id="que-impuesto-me-toca-segun-donde-este">¿Qué impuesto me toca según dónde esté?</h2>
 
 <div class="desliza"><table>
   <thead><tr><th>Territorio</th><th>Impuesto</th><th>Tipo general</th><th>Modelo</th></tr></thead>
@@ -89,14 +90,14 @@
   </tbody>
 </table></div>
 
-<h2>¿Cuándo llevo retención de IRPF?</h2>
+<h2 id="cuando-llevo-retencion-de-irpf">¿Cuándo llevo retención de IRPF?</h2>
 
 <p>Solo si se cumplen <b>las dos condiciones a la vez</b>: que tu actividad sea profesional y que el cliente sea empresa, autónomo o entidad pública. A un particular nunca, porque no presenta el modelo 111 y no podría ingresarla.</p>
 
 <p>Todo el detalle, con las excepciones y las fuentes, en el artículo:
 <a href="../../es/factura-autonomo-irpf-iva-igic/">cómo se hace una factura de autónomo según dónde estés</a>.</p>
 
-<h2>Otras herramientas</h2>
+<h2 id="otras-herramientas">Otras herramientas</h2>
 <ul>
   <li><a href="../calculadora-finiquito/">Calculadora de finiquito</a></li>
   <li><a href="../">Todas las calculadoras</a></li>
@@ -115,17 +116,17 @@ la Ley 20/1991 del REF canario y el artículo 95 del Reglamento del IRPF.</p>
      en su propio campo y con ayuda: nadie se sabe si su servicio es 21 o 10. */
   const TIPOS = {
     iva: [
-      {v:21, txt:"21 % — general", ej:"La mayoría de servicios profesionales: consultoría, diseño, informática, abogacía, marketing."},
-      {v:10, txt:"10 % — reducido", ej:"Hostelería, transporte de viajeros, reformas en vivienda, peluquería, entradas a espectáculos."},
-      {v:4,  txt:"4 % — superreducido", ej:"Pan, leche, huevos, frutas y verduras, libros, prensa, medicamentos."},
+      {v:21, txt:"21 % (general)", ej:"La mayoría de servicios profesionales: consultoría, diseño, informática, abogacía, marketing."},
+      {v:10, txt:"10 % (reducido)", ej:"Hostelería, transporte de viajeros, reformas en vivienda, peluquería, entradas a espectáculos."},
+      {v:4,  txt:"4 % (superreducido)", ej:"Pan, leche, huevos, frutas y verduras, libros, prensa, medicamentos."},
       {v:0,  txt:"Exento de IVA", ej:"Sanidad, educación reglada, seguros. Aunque no lleve IVA, la retención de IRPF sí se aplica."},
     ],
     igic: [
-      {v:7,  txt:"7 % — general", ej:"La mayoría de servicios profesionales en Canarias."},
-      {v:3,  txt:"3 % — reducido", ej:"Industria, transporte, algunos bienes."},
-      {v:0,  txt:"0 % — tipo cero", ej:"Pan, leche, libros, medicamentos, vivienda protegida."},
-      {v:15, txt:"15 % — incrementado", ej:"Algunos bienes concretos; vigente desde 2026."},
-      {v:20, txt:"20 % — especial", ej:"Labores del tabaco y otros supuestos tasados."},
+      {v:7,  txt:"7 % (general)", ej:"La mayoría de servicios profesionales en Canarias."},
+      {v:3,  txt:"3 % (reducido)", ej:"Industria, transporte, algunos bienes."},
+      {v:0,  txt:"0 % (tipo cero)", ej:"Pan, leche, libros, medicamentos, vivienda protegida."},
+      {v:15, txt:"15 % (incrementado)", ej:"Algunos bienes concretos; vigente desde 2026."},
+      {v:20, txt:"20 % (especial)", ej:"Labores del tabaco y otros supuestos tasados."},
     ],
     ipsi: [
       {v:-1, txt:"Según la ordenanza de tu ciudad", ej:"Ceuta y Melilla fijan sus tipos por ordenanza: del 0,5 % al 10 % según la actividad. Consúltala."},
@@ -170,9 +171,9 @@ la Ley 20/1991 del REF canario y el artículo 95 del Reglamento del IRPF.</p>
 
     let h = `<div class="l"><span>Base imponible</span><b>${eur(base)}</b></div>`;
     if (exportacion)
-      h += `<div class="l apagado"><span>Sin ${nombre}: la operación va exenta</span><b>—</b></div>`;
+      h += `<div class="l apagado"><span>Sin ${nombre}: la operación va exenta</span><b>no aplica</b></div>`;
     else if (fam === "ipsi")
-      h += `<div class="l apagado"><span>IPSI — según la ordenanza de tu ciudad</span><b>—</b></div>`;
+      h += `<div class="l apagado"><span>IPSI: según la ordenanza de tu ciudad</span><b>no aplica</b></div>`;
     else if (tipo === 0)
       h += `<div class="l apagado"><span>Operación exenta de ${nombre}</span><b>0,00 €</b></div>`;
     else
@@ -181,7 +182,7 @@ la Ley 20/1991 del REF canario y el artículo 95 del Reglamento del IRPF.</p>
     if (x.retiene)
       h += `<div class="l"><span>− Retención IRPF ${x.pct} %</span><b>−${eur(x.ret)}</b></div>`;
     else
-      h += `<div class="l apagado"><span>Sin retención de IRPF</span><b>—</b></div>`;
+      h += `<div class="l apagado"><span>Sin retención de IRPF</span><b>no aplica</b></div>`;
     h += `<div class="l tot"><span>Total a cobrar</span><b>${eur(x.total)}</b></div>`;
 
     if (cliente === "otroterr")
@@ -212,7 +213,7 @@ la Ley 20/1991 del REF canario y el artículo 95 del Reglamento del IRPF.</p>
 </main>
 
 <footer>
-  <p><b>ZarWealth</b> — Dinero, con números y sin humo.</p>
+  <p><b>ZarWealth</b>: Dinero, con números y sin humo.</p>
   <p class="mini">Cálculo orientativo con la normativa vigente. No sustituye a un
   profesional: si hay mucho en juego, contrástalo.</p>
 </footer>
