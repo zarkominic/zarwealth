@@ -66,8 +66,9 @@ article{max-width:var(--lectura);margin-inline:auto}
 
 .contenido{font-size:1.0625rem}
 article p{margin:0 0 1.2em;max-width:none}
-article h2{font-size:clamp(1.75rem,1.4vw + 1.1rem,2.5rem);line-height:1.08;max-width:24ch;margin:2em 0 .6em;color:var(--color-ink)}
-article h3{font-size:var(--text-title);line-height:1.2;margin:1.8em 0 .5em;color:var(--color-ink)}
+/* títulos de sección y preguntas: un escalón por encima del texto, no tres (en PC el h2 iba a 40px y el h3 a 26px con el texto a 20px) */
+article h2{font-size:clamp(1.5rem,0.7vw + 1.15rem,2rem);line-height:1.12;max-width:24ch;margin:2em 0 .6em;color:var(--color-ink)}
+article h3{font-size:clamp(1.25rem,0.3vw + 1.1rem,1.5rem);line-height:1.25;margin:1.8em 0 .5em;color:var(--color-ink)}
 article ul,article ol{margin:0 0 1.2em;padding-left:1.3em}
 article li{margin-bottom:.45em}
 article li::marker{color:var(--color-muted)}
@@ -78,11 +79,15 @@ article hr{border:0;border-top:var(--rule-hair) solid var(--color-rule);margin:v
 article code{font-family:var(--font-outlier);font-size:.88em;background:var(--color-paper-2);padding:.1em .35em;border-radius:6px}
 
 /* tablas: abren con una regla de tinta y siguen con líneas finas */
-article table{width:100%;border-collapse:collapse;margin:var(--space-xl) 0;font-size:var(--text-sm);
+/* la tabla sigue al texto (0.9em): a 14px fijos se quedaba en 14 junto a párrafos de 20 */
+article table{width:100%;border-collapse:collapse;margin:var(--space-xl) 0;font-size:.9em;line-height:1.45;
   font-variant-numeric:tabular-nums;border-top:var(--rule-hair) solid var(--color-ink)}
 article th{text-align:left;padding:.75rem .8rem;border-bottom:var(--rule-hair) solid var(--color-rule);
   font-weight:600;color:var(--color-ink);vertical-align:bottom}
 article td{padding:.75rem .8rem;border-bottom:var(--rule-hair) solid var(--color-rule);vertical-align:top}
+/* las tablas migradas de Ghost traen font-size:12-16px escrito en cada celda: que sigan al texto como las demás */
+.contenido table[style*="font-size"]{font-size:.9em !important}
+.contenido :is(thead,tbody,tr,th,td)[style*="font-size"]{font-size:inherit !important}
 article tr:last-child td{border-bottom-color:var(--color-ink)}
 @media (min-width:68rem){
   :is(article,.contenido) > table,.desliza{width:min(64rem,100cqi) !important;max-width:none !important;position:relative;left:50%;translate:-50% 0}
