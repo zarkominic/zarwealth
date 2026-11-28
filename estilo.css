@@ -48,10 +48,11 @@ strong,b{color:var(--color-ink);font-weight:600}
 main{max-width:var(--container);margin-inline:auto;padding:var(--space-2xl) var(--gutter) 0;container-type:inline-size}
 article{max-width:var(--lectura);margin-inline:auto}
 .cabecera{margin-bottom:var(--space-xl)}
-.cabecera h1{font-size:var(--text-display-s);line-height:1.02;max-width:20ch;color:var(--color-ink)}
-@media (min-width:68rem){.cabecera h1{width:min(60rem,100cqi);max-width:20ch}}
+/* título, bajada y subtítulos ocupan todo el ancho de la columna como el texto: sin tope en «ch» ni
+   «text-wrap:balance» (base.css), que en el móvil los dejaba en una columna estrecha a la izquierda */
+.cabecera h1{font-size:var(--text-display-s);line-height:1.02;max-width:none;text-wrap:wrap;color:var(--color-ink)}
 .etiqueta{font-size:var(--text-sm);color:var(--color-muted);margin:0 0 var(--space-sm)}
-.bajada{font-size:var(--text-lead);line-height:1.45;color:var(--color-ink-2);max-width:52ch;margin:var(--space-md) 0 var(--space-lg)}
+.bajada{font-size:var(--text-lead);line-height:1.45;color:var(--color-ink-2);max-width:none;margin:var(--space-md) 0 var(--space-lg)}
 .firma{display:flex;align-items:center;gap:var(--space-xs);font-size:var(--text-sm);color:var(--color-muted);margin:0}
 .avatar{width:32px;height:32px;border-radius:var(--radius-pill);background:var(--color-paper-2);
   border:var(--rule-hair) solid var(--color-rule);display:grid;place-content:center;
@@ -67,8 +68,8 @@ article{max-width:var(--lectura);margin-inline:auto}
 .contenido{font-size:1.0625rem}
 article p{margin:0 0 1.2em;max-width:none}
 /* títulos de sección y preguntas: un escalón por encima del texto, no tres (en PC el h2 iba a 40px y el h3 a 26px con el texto a 20px) */
-article h2{font-size:clamp(1.5rem,0.7vw + 1.15rem,2rem);line-height:1.12;max-width:24ch;margin:2em 0 .6em;color:var(--color-ink)}
-article h3{font-size:clamp(1.25rem,0.3vw + 1.1rem,1.5rem);line-height:1.25;margin:1.8em 0 .5em;color:var(--color-ink)}
+article h2{font-size:clamp(1.5rem,0.7vw + 1.15rem,2rem);line-height:1.12;max-width:none;text-wrap:wrap;margin:2em 0 .6em;color:var(--color-ink)}
+article h3{font-size:clamp(1.25rem,0.3vw + 1.1rem,1.5rem);line-height:1.25;max-width:none;text-wrap:wrap;margin:1.8em 0 .5em;color:var(--color-ink)}
 article ul,article ol{margin:0 0 1.2em;padding-left:1.3em}
 article li{margin-bottom:.45em}
 article li::marker{color:var(--color-muted)}
